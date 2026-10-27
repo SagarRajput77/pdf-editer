@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Editor</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232563eb'/%3E%3Cpath d='M10 7h8l5 5v13H10z' fill='white'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <div class="brand"><span class="logo">PDF</span><span>Editor</span></div>
+        <div class="doc-name" id="docName"></div>
+        <div class="top-actions">
+          <button class="btn ghost" id="btnOpen" data-icon="upload"><span>Open</span></button>
+          <button class="btn primary" id="btnDownload" data-icon="download" disabled><span>Download</span></button>
+        </div>
+      </header>
+
+      <nav class="toolbar" id="toolbar" hidden>
+        <div class="tool-group">
+          <button class="tool" data-tool="select" data-icon="pointer" title="Select (V)"><span>Select</span></button>
+          <button class="tool" data-tool="edittext" data-icon="edit" title="Edit existing text (E)"><span>Edit text</span></button>
+          <button class="tool" data-tool="text" data-icon="type" title="Add text (T)"><span>Add text</span></button>
+        </div>
+        <div class="tool-group">
+          <button class="tool" data-tool="whiteout" data-icon="eraser" title="Whiteout / erase (W)"><span>Whiteout</span></button>
+          <button class="tool" data-tool="highlight" data-icon="highlighter" title="Highlight (H)"><span>Highlight</span></button>
+          <button class="tool" data-tool="rect" data-icon="square" title="Rectangle (R)"><span>Rectangle</span></button>
+          <button class="tool" data-tool="ellipse" data-icon="circle" title="Ellipse (O)"><span>Ellipse</span></button>
+          <button class="tool" data-tool="line" data-icon="line" title="Line (L)"><span>Line</span></button>
+          <button class="tool" data-tool="draw" data-icon="pencil" title="Freehand draw (D)"><span>Draw</span></button>
+        </div>
+        <div class="tool-group">
+          <button class="tool" data-action="image" data-icon="image" title="Insert image"><span>Image</span></button>
+          <button class="tool" data-action="sign" data-icon="signature" title="Add signature"><span>Sign</span></button>
+          <button class="tool" data-action="scan" data-icon="scan" title="Scan tools: OCR & enhance"><span>Scan tools</span></button>
+        </div>
+        <div class="tool-group">
+          <button class="tool icon-only" id="btnUndo" data-icon="undo" title="Undo (Ctrl+Z)" disabled></button>
+          <button class="tool icon-only" id="btnRedo" data-icon="redo" title="Redo (Ctrl+Y)" disabled></button>
+        </div>
+        <div class="tool-group zoom">
+          <button class="tool icon-only" id="btnZoomOut" data-icon="minus" title="Zoom out"></button>
+          <button class="zoom-label" id="zoomLabel" title="Fit to width">100%</button>
+          <button class="tool icon-only" id="btnZoomIn" data-icon="plus" title="Zoom in"></button>
+        </div>
+      </nav>
+
+      <main class="workspace" id="workspace" hidden>
+        <aside class="thumbs" id="thumbs" aria-label="Pages"></aside>
+        <section class="viewer" id="viewer">
+          <div class="pages" id="pages"></div>
+        </section>
+        <aside class="panel" id="panel">
+          <div class="tabs" role="tablist">
+            <button class="tab active" data-tab="props" role="tab">Properties</button>
+            <button class="tab" data-tab="scan" role="tab">Scan tools</button>
+          </div>
+          <div class="tab-body" id="propsPanel"></div>
+          <div class="tab-body" id="scanPanel" hidden></div>
+        </aside>
+      </main>
+
+      <section class="landing" id="landing">
+        <div class="hero">
+          <h1>Edit PDF files, including scanned documents</h1>
+          <p class="lead">
+            Change existing text, add text, images and signatures, whiteout, highlight and annotate. Scanned pages get
+            OCR, so you can edit their text too. Everything runs in your browser, and your files never leave your computer.
+          </p>
+          <div class="dropzone" id="dropzone">
+            <div class="dz-icon" data-icon="upload"></div>
+            <button class="btn primary lg" id="btnOpenLanding"><span>Upload PDF or scanned images</span></button>
+            <p class="muted">or drop files here · PDF, JPG, PNG, WEBP</p>
+          </div>
+        </div>
+        <div class="features">
+          <div class="feature"><span data-icon="edit"></span><h3>Edit existing text</h3><p>Click text on a page to change it. The font size and colour are matched to the original.</p></div>
+          <div class="feature"><span data-icon="scan"></span><h3>Edit scanned documents</h3><p>OCR recognizes text in English, Hindi and many other languages, then you edit it like normal text.</p></div>
+          <div class="feature"><span data-icon="sparkles"></span><h3>Enhance scans</h3><p>Grayscale or B&amp;W, auto contrast, background cleanup and straightening.</p></div>
+          <div class="feature"><span data-icon="search"></span><h3>Make searchable</h3><p>Adds an invisible OCR text layer so the downloaded PDF can be searched and copied.</p></div>
+          <div class="feature"><span data-icon="signature"></span><h3>Sign &amp; annotate</h3><p>Draw or type a signature, add images, shapes, highlights and freehand ink.</p></div>
+          <div class="feature"><span data-icon="layers"></span><h3>Organize pages</h3><p>Rotate, reorder, duplicate, insert blank pages or delete pages.</p></div>
+        </div>
+      </section>
+    </div>
+
+    <input type="file" id="fileInput" accept="application/pdf,.pdf,image/*" multiple hidden />
+    <input type="file" id="imageInput" accept="image/*" hidden />
+    <div class="loading" id="loading" hidden><div class="spinner"></div><span id="loadingText">Working…</span></div>
+    <div id="toasts" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

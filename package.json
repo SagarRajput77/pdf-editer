@@ -1,0 +1,21 @@
+{
+  "name": "pdf-editor",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Browser-based PDF editor with scanned-document (OCR) editing",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "fabric": "6.9.1",
+    "pdf-lib": "1.17.1",
+    "pdfjs-dist": "4.10.38",
+    "tesseract.js": "5.1.1"
+  },
+  "devDependencies": {
+    "vite": "5.4.21"
+  }
+}
